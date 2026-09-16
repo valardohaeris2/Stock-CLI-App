@@ -17,7 +17,9 @@ def plot_analysis(ticker: str, df: pd.DataFrame, save_path: str | None = None) -
         if col in df:
             price_ax.plot(df.index, df[col], style, label=col, linewidth=1)
     if "BB_Upper" in df and "BB_Lower" in df:
-        price_ax.fill_between(df.index, df["BB_Lower"], df["BB_Upper"], color="gray", alpha=0.15, label="Bollinger Bands")
+        price_ax.fill_between(
+            df.index, df["BB_Lower"], df["BB_Upper"], color="gray", alpha=0.15, label="Bollinger Bands"
+        )
     price_ax.set_title(f"{ticker.upper()} Price & Moving Averages")
     price_ax.legend(loc="upper left")
     price_ax.grid(alpha=0.3)

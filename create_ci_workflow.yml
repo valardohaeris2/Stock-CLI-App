@@ -1,0 +1,61 @@
+---
+- name: Create GitHub Actions CI workflow for stock-analyzer
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    repo_root: "{{ playbook_dir }}"
+    workflow_dir: "{{ repo_root }}/.github/workflows"
+
+  tasks:
+    - name: Ensure .github/workflows directory exists
+      ansible.builtin.file:
+        path: "{{ workflow_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write flake8 config
+      ansible.builtin.copy:
+        dest: "{{ repo_root }}/.flake8"
+        mode: "0644"
+        content: |
+          [flake8]
+          max-line-length = 120
+          exclude = .venv,.git,__pycache__
+
+    - name: Write CI workflow
+      ansible.builtin.copy:
+        dest: "{{ workflow_dir }}/ci.yml"
+        mode: "0644"
+        content: |
+          name: CI
+
+          on:
+            push:
+              branches: [main]
+            pull_request:
+              branches: [main]
+
+          jobs:
+            build:
+              runs-on: ubuntu-latest
+              steps:
+                - name: Check out repository
+                  uses: actions/checkout@v4
+
+                - name: Set up Python
+                  uses: actions/setup-python@v5
+                  with:
+                    python-version: "3.11"
+
+                - name: Install dependencies
+                  run: |
+                    pip install -r requirements.txt
+                    pip install flake8
+
+                - name: Lint with flake8
+                  run: flake8 .
+
+                - name: Sanity check - CLI runs
+                  run: python main.py --help
