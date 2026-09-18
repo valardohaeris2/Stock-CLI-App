@@ -1,4 +1,4 @@
-# Stock Analyzer
+# Stock Analyzer App
 
 A command-line tool for pulling stock price history and computing common technical indicators.
 
