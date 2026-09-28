@@ -7,7 +7,7 @@ release.config.js
 create_ci_workflow.yml
 
 # Python cache
-__pycache__
+**/__pycache__
 *.pyc
 
 # Virtual environments
