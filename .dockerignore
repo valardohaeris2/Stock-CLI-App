@@ -24,3 +24,12 @@ CHANGELOG.md
 *.csv
 *.png
 
+
+# Secrets and local config
+.env
+.env.*
+*.pem
+*.key
+.flake8
+Dockerfile
+.dockerignore
