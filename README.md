@@ -1,6 +1,6 @@
 # Stock Analyzer App
 
-A command-line tool for pulling stock price history and computing common technical indicators. Uses semantic-release to build new releases via a GitHub Action.
+A command-line tool for pulling stock price history and computing common technical indicators. Uses semantic-release to build new releases via a GitHub Action. User API is in development.
 
 ## Setup
 
