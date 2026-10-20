@@ -56,4 +56,4 @@ RUN mkdir /output && chown app:app /output
 USER app:app
 
 ENTRYPOINT ["python", "main.py"]
-CMD ["--help"]
+# CMD ["--help"]
